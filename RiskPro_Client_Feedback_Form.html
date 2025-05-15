@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Riskpro India - Client Feedback Form</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #39393c, #c2e9fb);
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      width: 95%;
+      max-width: 950px;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+
+    h1 {
+      font-size: 30px;
+      color: #1a1a2e;
+    }
+
+    .subtitle {
+      font-size: 20px;
+      color: #3a3a5a;
+      margin-bottom: 30px;
+    }
+
+    label, legend {
+      display: block;
+      margin-top: 24px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #1e1e30;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input[type="text"]:focus, textarea:focus {
+      border-color: #5a8dee;
+      box-shadow: 0 0 4px rgba(90, 141, 238, 0.3);
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .required {
+      color: red;
+    }
+
+    .form-section {
+      margin-bottom: 40px;
+    }
+
+    .rating-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    .rating-table th, .rating-table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .rating-table thead {
+      background-color: #5a8dee;
+      color: white;
+    }
+
+    .rating-table td:first-child {
+      text-align: left;
+      background-color: #f9f9f9;
+    }
+
+    .form-footer, .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .form-footer button, .navigation-buttons button {
+      padding: 10px 26px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .form-footer button:hover, .navigation-buttons button:hover {
+      background: linear-gradient(135deg, #5a8dee, #5936b4);
+      transform: scale(1.02);
+    }
+
+    .page-indicator {
+      font-size: 14px;
+      color: #444;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media screen and (max-width: 600px) {
+      .form-footer, .navigation-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .form-footer .page-indicator {
+        order: -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Riskpro India Client Feedback </h1>
+    <div class="subtitle">Details of the Client & Assignment</div>
+
+    <form id="client-feedback" action="submit.php" method="POST" onsubmit="return validateForm();">
+
+      <!-- Page 1 -->
+      <div class="form-section" id="page1">
+        <label for="orgName">1. Your organisation Name <span class="required">*</span></label>
+        <input type="text" id="orgName" name="orgName" required>
+
+        <label for="engagement">2. Type of Engagement <span class="required">*</span></label>
+        <input type="text" id="engagement" name="engagement" required>
+
+        <label for="yourName">3. Your name and designation <span class="required">*</span></label>
+        <input type="text" id="yourName" name="yourName" required>
+
+        <div class="navigation-buttons">
+          <span></span>
+          <button type="button" onclick="showPage(2)">Next</button>
+        </div>
+      </div>
+
+      <!-- Page 2 -->
+      <div class="form-section hidden" id="page2">
+        <legend>4. Please give us a rating for the engagement <span class="required">*</span></legend>
+        <table class="rating-table">
+          <thead>
+            <tr>
+              <th>Statement</th>
+              <th>Agree</th>
+              <th>Partially Agree</th>
+              <th>Disagree</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Project staff considered your inputs throughout the engagement response.</td>
+              <td><input type="radio" name="q1" value="Agree" required></td>
+              <td><input type="radio" name="q1" value="Partially Agree"></td>
+              <td><input type="radio" name="q1" value="Disagree"></td>
+            </tr>
+            <tr>
+              <td>The project was conducted in a structured and professional manner.</td>
+              <td><input type="radio" name="q2" value="Agree" required></td>
+              <td><input type="radio" name="q2" value="Partially Agree"></td>
+              <td><input type="radio" name="q2" value="Disagree"></td>
+            </tr>
+            <tr>
+              <td>The project was completed within an agreed amount of time.</td>
+              <td><input type="radio" name="q3" value="Agree" required></td>
+              <td><input type="radio" name="q3" value="Partially Agree"></td>
+              <td><input type="radio" name="q3" value="Disagree"></td>
+            </tr>
+            <tr>
+              <td>Project staff members were professional, responsive and had appropriate communication skills.</td>
+              <td><input type="radio" name="q4" value="Agree" required></td>
+              <td><input type="radio" name="q4" value="Partially Agree"></td>
+              <td><input type="radio" name="q4" value="Disagree"></td>
+            </tr>
+            <tr>
+              <td>Communication of project status and results during the engagement was timely and clear.</td>
+              <td><input type="radio" name="q5" value="Agree" required></td>
+              <td><input type="radio" name="q5" value="Partially Agree"></td>
+              <td><input type="radio" name="q5" value="Disagree"></td>
+            </tr>
+            <tr>
+              <td>Key issues, constraints/risks were adequately communicated during the project.</td>
+              <td><input type="radio" name="q6" value="Agree" required></td>
+              <td><input type="radio" name="q6" value="Partially Agree"></td>
+              <td><input type="radio" name="q6" value="Disagree"></td>
+            </tr>
+            <tr>
+              <td>The disruption of daily activities was minimized as much as possible during the project.</td>
+              <td><input type="radio" name="q7" value="Agree" required></td>
+              <td><input type="radio" name="q7" value="Partially Agree"></td>
+              <td><input type="radio" name="q7" value="Disagree"></td>
+            </tr>
+            <tr>
+              <td>The final deliverables were accurate and timely, and were clearly communicated.</td>
+              <td><input type="radio" name="q8" value="Agree" required></td>
+              <td><input type="radio" name="q8" value="Partially Agree"></td>
+              <td><input type="radio" name="q8" value="Disagree"></td>
+            </tr>
+            <tr>
+              <td>The project team was technically competent.</td>
+              <td><input type="radio" name="q9" value="Agree" required></td>
+              <td><input type="radio" name="q9" value="Partially Agree"></td>
+              <td><input type="radio" name="q9" value="Disagree"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <label for="pleased">5. Were there aspects of the project that you were particularly pleased with?</label>
+        <textarea id="pleased" name="pleased" rows="3"></textarea>
+
+        <label for="changes">6. Were there any aspects of the project that you would like to see changed?</label>
+        <textarea id="changes" name="changes" rows="3"></textarea>
+
+        <label for="comments">7. Any Other Comments</label>
+        <textarea id="comments" name="comments" rows="3"></textarea>
+
+        <label for="testimonial">8. Would you be willing to give a Testimonial for us?</label>
+        <textarea id="testimonial" name="testimonial" rows="3"></textarea>
+
+        <div class="form-footer">
+          <button type="button" onclick="showPage(1)">Back</button>
+          <button type="submit">Submit</button>
+          <div class="page-indicator">Page 2 of 2</div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <script>
+    function showPage(pageNum) {
+      document.getElementById('page1').classList.add('hidden');
+      document.getElementById('page2').classList.add('hidden');
+      document.getElementById(`page${pageNum}`).classList.remove('hidden');
+    }
+
+    function validateForm() {
+      const requiredFields = ['orgName', 'engagement', 'yourName'];
+      for (let id of requiredFields) {
+        if (!document.getElementById(id).value.trim()) {
+          alert('Please fill all required fields on Page 1.');
+          showPage(1);
+          return false;
+        }
+      }
+
+      const radioGroups = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8', 'q9'];
+      for (let name of radioGroups) {
+        if (![...document.getElementsByName(name)].some(r => r.checked)) {
+          alert('Please complete all ratings on Page 2.');
+          showPage(2);
+          return false;
+        }
+      }
+
+      return true;
+    }
+  </script>
+</body>
+</html>
